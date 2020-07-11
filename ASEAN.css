@@ -1,0 +1,85 @@
+.country {
+    stroke:#000000;
+    stroke-opacity:1;
+    stroke-opacity: 0.5;
+    stroke-width: 0.17324010531107584;
+    stroke-dasharray: none;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+    stroke-miterlimit: 10;
+    fill:#84ADE9;
+    fill-opacity:1;
+    fill-rule: nonzero;
+    opacity: 1;
+}
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+  
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+   
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+#myanmar:hover {
+    fill:red;
+}
+
+#laos:hover {
+    fill:green;
+}
+
+#vietnam:hover {
+    fill:beige;
+}
+
+#thailand:hover {
+    fill:blue;
+}
+
+#cambodia:hover {
+    fill:yellow;
+}
+
+#malaysia:hover {
+    fill:hotpink;
+}
+
+#indonesia:hover {
+    fill:brown;
+}
+
+#singapore:hover {
+    fill:aqua;
+}
+
+#brunei:hover {
+    fill:black;
+}
+
+#philippines:hover {
+    fill:lavender;
+}
+
+.invisible {
+    color: transparent;
+}
