@@ -1,16 +1,46 @@
 // 
 
 const countries = [
-    {name: "Brunei", description: "Is an Asean Country"},
-    {name: "Cambodia", description: "Is an Asean Country"},
-    {name: "Indonesia", description: "Is an Asean Country"},
-    {name: "Laos", description: "Is an Asean Country"},
-    {name: "Malaysia", description: "Is an Asean Country"},
-    {name: "Myanmar", description: "Is an Asean Country"},
-    {name: "Philippines", description: "Is an Asean Country"},
-    {name: "Singapore", description: "Is an Asean Country"},
-    {name: "Thailand", description: "Is an Asean Country"},
-    {name: "VietNam", description: "Is an Asean Country"}
+    {
+        name: "Brunei",
+        description: "\u25CA Is an Asean Country"
+    },
+    { 
+        name: "Cambodia",
+        description: "\u25CA Is an Asean Country"
+    },
+    { 
+        name: "Indonesia",
+        description: "\u25CA Is an Asean Country"
+    },
+    { 
+        name: "Laos",
+        description: "\u25CA Is an Asean Country"
+    },
+    { 
+        name: "Malaysia",
+        description: "\u25CA Is an Asean Country"
+    },
+    { 
+        name: "Myanmar",
+        description: "\u25CA Is an Asean Country"
+    },
+    { 
+        name: "Philippines",
+        description: "\u25CA Is an Asean Country"
+    },
+    { 
+        name: "Singapore",
+        description: "\u25CA Is an Asean Country"
+    },
+    { 
+        name: "Thailand",
+        description: "\u25CA Is an Asean Country"
+    },
+    { 
+        name: "VietNam",
+        description: "\u25CA Is an Asean Country"
+    }
 ];
 
 let country_info = document.querySelector('#info');
@@ -25,13 +55,13 @@ countries.forEach((country) => {
     country_selected.addEventListener("mouseover", () => {
         // may replace with innerHTML for styling or something 
         country_name.innerText += country.name;
-        country_info.innerText += country.description;
-        
+        country_info.innerText += "\n" + country.description;
+
     });
-    
+
     country_selected.addEventListener("mouseout", () => {
-        country_name.innerText = "Country: ";
-        country_info.innerText = "Description: ";
+        country_name.innerText = "";
+        country_info.innerText = "";
         // country_info.style.background = "";
         // country_info.style.border = "";
     });

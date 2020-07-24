@@ -2,9 +2,11 @@
     background-color: grey;
     white-space: nowrap;
     width: 820px;
+    height: 820px;
     margin-left: 25%;
     margin-right: auto;
     padding: 10px;
+
 }
 
 .country_details {
@@ -14,18 +16,28 @@
     margin-left: 5%;
     /* margin-top: 5%; */
     /* float: left; */
-    
+    display: grid;
+    padding: 10%;
     /* display: inline-block; */
     width: 20%;
     /* margin-top: 20%;     */
 }
 
+.details_container{
+    /* width: auto; */
+    display: inline-block;
+    margin-top: 10%;
+    width: 35%;
+    overflow: auto;
+    /* border: 2px solid white; */
+}
+
 svg {
     /* float: left; */
-    display: grid;
+    display: inline-block;
     /* width: auto; */
     margin-top: 10%;
-    margin-left: 30%;
+    /* margin-left: 15%; */
     border: 2px solid white;
     /* box-sizing: border-box;
     overflow: hidden; */
@@ -48,8 +60,9 @@ svg {
 }
 
 .country:hover {
-    fill:red;
-    border-color: white;
+    fill:rgb(179, 187, 170);
+    stroke:#fafbfc;
+    
 }
 
 /* 
