@@ -1,3 +1,22 @@
+#info {
+    /* margin-right: 30%;
+    padding-left: 0%; */
+    /* position: relative; */
+    margin-left: 1rem;
+    
+
+}
+
+svg {
+    /* position: relative; */
+    left: 2rem;
+    top: 2rem;
+    float: left;
+    /* box-sizing: border-box;
+    overflow: hidden; */
+    /* z-index: -1; */
+}
+
 .country {
     stroke:#000000;
     stroke-opacity:1;
@@ -13,6 +32,10 @@
     opacity: 1;
 }
 
+.country:hover {
+    fill:red;
+    border-color: white;
+}
 
 .tooltip {
     position: relative;
@@ -40,7 +63,7 @@
     visibility: visible;
 }
 
-#myanmar:hover {
+/* #myanmar:hover {
     fill:red;
 }
 
@@ -82,4 +105,4 @@
 
 .invisible {
     color: transparent;
-}
+} */

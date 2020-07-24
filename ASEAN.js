@@ -24,11 +24,14 @@ countries.forEach((country) => {
     country_selected.addEventListener("mouseover", () => {
         // may replace with innerHTML for styling or something 
         country_info.innerText = country.name + "\n" + country.description;
-
+        country_info.style.background = "#E0E0DB";
+        country_info.style.border = "1px solid";
     });
     
     country_selected.addEventListener("mouseout", () => {
         country_info.innerText = "";
+        country_info.style.background = "";
+        country_info.style.border = "";
     });
 
 });
