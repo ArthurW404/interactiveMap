@@ -14,6 +14,7 @@ const countries = [
 ];
 
 let country_info = document.querySelector('#info');
+let country_name = document.querySelector('#country_name');
 
 // loop through every country id and add hover-like tag where information about the country is displayed 
 countries.forEach((country) => {
@@ -23,15 +24,16 @@ countries.forEach((country) => {
     let country_selected = document.querySelector(country_id);
     country_selected.addEventListener("mouseover", () => {
         // may replace with innerHTML for styling or something 
-        country_info.innerText = country.name + "\n" + country.description;
-        country_info.style.background = "#E0E0DB";
-        country_info.style.border = "1px solid";
+        country_name.innerText += country.name;
+        country_info.innerText += country.description;
+        
     });
     
     country_selected.addEventListener("mouseout", () => {
-        country_info.innerText = "";
-        country_info.style.background = "";
-        country_info.style.border = "";
+        country_name.innerText = "Country: ";
+        country_info.innerText = "Description: ";
+        // country_info.style.background = "";
+        // country_info.style.border = "";
     });
 
 });
