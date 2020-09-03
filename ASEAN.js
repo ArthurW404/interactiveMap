@@ -111,7 +111,7 @@ countries.forEach((country) => {
   solution for manipulating svg
 */ 
 
-let interactive_map = document.querySelector(".interactive_map");
+// let interactive_map = document.querySelector(".interactive_map");
 
 const MAX_WIDTH = 480;
 const MAX_HEIGHT = 480;
@@ -151,8 +151,12 @@ function svg_mv_xy(svg, dx, dy) {
   // TODO have a way of capping the new_coord such that you cannot keep moving past a certain point 
   // as eventually the blue background disappears (since it's just a rectangle obj in svg) and it will look bad
   let new_x = box.x + dx;
+  if (new_x < 0) 
+    new_x = 0;
   let new_y =  box.y + dy;
-
+  if (new_y < 0) 
+    new_y = 0;
+  
   let new_prop = new_x + " " + new_y + " " + box.width + " " + box.height;
   console.log(new_prop);
   svg.setAttribute('viewBox', new_prop);
@@ -160,7 +164,57 @@ function svg_mv_xy(svg, dx, dy) {
 
 var svg = document.querySelector('svg');
 
-var lastScrollTop = 0;
+/**
+ * Function used by svg to give svg dragging capability
+ * @param {*} evt 
+ */
+function makeDraggable(evt) {
+  var svg = evt.target;
+  var is_drag = false;
+  var prev_coord = null;
+  svg.addEventListener('mousedown', startDrag);
+  svg.addEventListener('mousemove', drag);
+  svg.addEventListener('mouseup', endDrag);
+  svg.addEventListener('mouseleave', endDrag);
+
+  function getMousePosition(evt) {
+    var CTM = svg.getScreenCTM();
+    return {
+      x: (evt.clientX - CTM.e) / CTM.a,
+      y: (evt.clientY - CTM.f) / CTM.d
+    };
+  }
+
+  function startDrag(evt) {
+    is_drag = true;
+    prev_coord = getMousePosition(evt);
+  }
+
+  function drag(evt) {
+    if (is_drag) {
+      let curr_coord = getMousePosition(evt);
+      // process difference between prev and curr coord
+
+      // we only want the direction
+      let dx = prev_coord.x - curr_coord.x;
+      dx = dx > 0 ? 1 : -1;
+      let dy = prev_coord.y - curr_coord.y;
+      dy = dy > 0 ? 1 : -1;
+      svg_mv_xy(svg, dx, dy);
+      prev_coord = curr_coord;
+    }
+  }
+
+  function endDrag(evt) {
+    is_drag = false;
+  }
+}
+
+
+
+
+
+// var lastScrollTop = 0;
 
 // window.addEventListener("scroll",() => {
 //   var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
@@ -175,15 +229,9 @@ var lastScrollTop = 0;
 //   lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
 // }, {passive: true});
 
-
 // var runOnScroll =  function(evt) {
 //   // not the most exciting thing, but a thing nonetheless
 //   console.log(evt.target);
 // };
 
 // window.addEventListener("scroll", runOnScroll, {passive: true});
-
-svg_zoom(svg, 0.4);
-
-svg_mv_xy(svg, 50, 50);
-svg_mv_xy(svg, 60, 60);
