@@ -81,23 +81,109 @@ const countries = [
   },
 ];
 
+/*
+  This section of code handles hover effect of countries
+ */
+
 let country_info = document.querySelector("#info");
 let country_name = document.querySelector("#country_name");
-// loop through every country id and add hover-like tag where information about the country is displayed
+/* loop through every country id and add hover-like tag where information about the country is displayed */
 countries.forEach((country) => {
   let lcCountry = country.name.toLowerCase();
   let country_id = "#" + lcCountry;
   console.log(country_id);
   let country_selected = document.querySelector(country_id);
   country_selected.addEventListener("mouseover", () => {
-    // may replace with innerHTML for styling or something
+    /* may replace with innerHTML for styling or something */
     country_name.innerText += country.name;
     country_info.innerText += "\n" + country.description;
   });
   country_selected.addEventListener("mouseout", () => {
     country_name.innerText = "";
     country_info.innerText = "";
-    // country_info.style.background = "";
-    // country_info.style.border = "";
+    /* country_info.style.background = ""; */
+    /* country_info.style.border = ""; */
   });
 });
+
+
+/* 
+  solution for manipulating svg
+*/ 
+
+let interactive_map = document.querySelector(".interactive_map");
+
+const MAX_WIDTH = 480;
+const MAX_HEIGHT = 480;
+
+function min (val1, val2) {
+  return val1 > val2 ? val2 : val1;
+}
+
+/**
+ * Takes svg as input and zooms in or out based on value (which is a double acting as percentage)
+ * @param {*} svg 
+ * @param {*} value double between 0 and 1 to zoom in or > 1 to zoom out
+ */
+function svg_zoom(svg, value) {
+  var box = svg.viewBox.baseVal;
+
+  /**
+   * Width and height are capped at max_width/height 
+   */
+  let width = min(box.width * value, MAX_WIDTH);
+  let height =  min(box.height * value, MAX_HEIGHT);
+
+  let new_prop = box.x + " " + box.y + " " + width + " " + height;
+  console.log(new_prop);
+  svg.setAttribute('viewBox', new_prop);
+}
+
+/**
+ * Function for dragging the map along it's x,y coordinates
+ * @param {*} svg 
+ * @param {*} dx 
+ * @param {*} dy 
+ */
+function svg_mv_xy(svg, dx, dy) {
+  var box = svg.viewBox.baseVal;
+
+  // TODO have a way of capping the new_coord such that you cannot keep moving past a certain point 
+  // as eventually the blue background disappears (since it's just a rectangle obj in svg) and it will look bad
+  let new_x = box.x + dx;
+  let new_y =  box.y + dy;
+
+  let new_prop = new_x + " " + new_y + " " + box.width + " " + box.height;
+  console.log(new_prop);
+  svg.setAttribute('viewBox', new_prop);
+}
+
+var svg = document.querySelector('svg');
+
+var lastScrollTop = 0;
+
+// window.addEventListener("scroll",() => {
+//   var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+//   console.log("H");
+//   if (st > lastScrollTop){
+//      // downscroll code
+//      svg_zoom(svg, 1.1);
+//   } else {
+//      // upscroll code
+//      svg_zoom(svg, 0.9);
+//     }
+//   lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+// }, {passive: true});
+
+
+// var runOnScroll =  function(evt) {
+//   // not the most exciting thing, but a thing nonetheless
+//   console.log(evt.target);
+// };
+
+// window.addEventListener("scroll", runOnScroll, {passive: true});
+
+svg_zoom(svg, 0.4);
+
+svg_mv_xy(svg, 50, 50);
+svg_mv_xy(svg, 60, 60);
