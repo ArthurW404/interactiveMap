@@ -153,10 +153,14 @@ function svg_mv_xy(svg, dx, dy) {
   let new_x = box.x + dx;
   if (new_x < 0) 
     new_x = 0;
+  else if (new_x + box.width > MAX_WIDTH) 
+    new_x = MAX_WIDTH - box.height;
+
   let new_y =  box.y + dy;
   if (new_y < 0) 
     new_y = 0;
-  
+  else if (new_y + box.height > MAX_HEIGHT) 
+    new_y = MAX_HEIGHT - box.height;
   let new_prop = new_x + " " + new_y + " " + box.width + " " + box.height;
   console.log(new_prop);
   svg.setAttribute('viewBox', new_prop);
