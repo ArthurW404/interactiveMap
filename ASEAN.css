@@ -32,7 +32,6 @@ svg {
 
 .country {
   stroke: #000000;
-  stroke-opacity: 1;
   stroke-opacity: 0.5;
   stroke-width: 0.17324010531107584;
   stroke-dasharray: none;
@@ -46,6 +45,27 @@ svg {
 }
 
 .country:hover {
+  stroke: rgb(179, 187, 170);
+  stroke-width: 0.4;
+  stroke-dasharray: none;
+  stroke-linecap: round;
   fill: rgb(179, 187, 170);
-  stroke: #fafbfc;
+  fill-opacity: 1;
+  fill-rule: nonzero;
+  opacity: 1;
+}
+
+.width_warning {
+  visibility: hidden;
+}
+
+@media screen and (max-width: 1200px) {
+  svg {
+    visibility: hidden;
+  }
+
+  .width_warning {
+    visibility: visible;
+    text-align: center;
+  }
 }
