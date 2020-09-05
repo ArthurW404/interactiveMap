@@ -81,9 +81,9 @@ const countries = [
   },
 ];
 
-/*
-  This section of code handles hover effect of countries
- */
+/* ==================================================
+   This section of code handles hover effect of countries
+   ==================================================*/
 
 let country_info = document.querySelector("#info");
 let country_name = document.querySelector("#country_name");
@@ -107,16 +107,16 @@ countries.forEach((country) => {
 });
 
 
-/* 
-  solution for manipulating svg
-*/ 
+/* ==================================================
+   solution for manipulating svg
+   ==================================================*/
 
 // let interactive_map = document.querySelector(".interactive_map");
 
 const MAX_WIDTH = 480;
 const MAX_HEIGHT = 480;
 
-function min (val1, val2) {
+function min(val1, val2) {
   return val1 > val2 ? val2 : val1;
 }
 
@@ -132,7 +132,7 @@ function svg_zoom(svg, value) {
    * Width and height are capped at max_width/height 
    */
   let width = min(box.width * value, MAX_WIDTH);
-  let height =  min(box.height * value, MAX_HEIGHT);
+  let height = min(box.height * value, MAX_HEIGHT);
 
   let new_prop = box.x + " " + box.y + " " + width + " " + height;
   console.log(new_prop);
@@ -151,15 +151,15 @@ function svg_mv_xy(svg, dx, dy) {
   // TODO have a way of capping the new_coord such that you cannot keep moving past a certain point 
   // as eventually the blue background disappears (since it's just a rectangle obj in svg) and it will look bad
   let new_x = box.x + dx;
-  if (new_x < 0) 
+  if (new_x < 0)
     new_x = 0;
-  else if (new_x + box.width > MAX_WIDTH) 
+  else if (new_x + box.width > MAX_WIDTH)
     new_x = MAX_WIDTH - box.height;
 
-  let new_y =  box.y + dy;
-  if (new_y < 0) 
+  let new_y = box.y + dy;
+  if (new_y < 0)
     new_y = 0;
-  else if (new_y + box.height > MAX_HEIGHT) 
+  else if (new_y + box.height > MAX_HEIGHT)
     new_y = MAX_HEIGHT - box.height;
   let new_prop = new_x + " " + new_y + " " + box.width + " " + box.height;
   console.log(new_prop);
@@ -201,9 +201,9 @@ function makeDraggable(evt) {
 
       // we only want the direction
       let dx = prev_coord.x - curr_coord.x;
-      dx = dx > 0 ? 1 : -1;
+      dx = dx > 0 ? 2 : -2;
       let dy = prev_coord.y - curr_coord.y;
-      dy = dy > 0 ? 1 : -1;
+      dy = dy > 0 ? 2 : -2;
       svg_mv_xy(svg, dx, dy);
       prev_coord = curr_coord;
     }

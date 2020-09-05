@@ -1,6 +1,7 @@
 .interactive_map {
-  background-color: grey;
+  background-color: white;
   white-space: nowrap;
+  color: gray;
   width: 820px;
   height: 820px;
   margin-left: 10%;
@@ -45,11 +46,11 @@ svg {
 }
 
 .country:hover {
-  stroke: rgb(179, 187, 170);
+  stroke: white;
   stroke-width: 0.4;
   stroke-dasharray: none;
   stroke-linecap: round;
-  fill: rgb(179, 187, 170);
+  fill: white;
   fill-opacity: 1;
   fill-rule: nonzero;
   opacity: 1;
@@ -59,8 +60,10 @@ svg {
   visibility: hidden;
 }
 
+
+
 @media screen and (max-width: 1200px) {
-  svg {
+  .interactive_map {
     visibility: hidden;
   }
 
@@ -68,4 +71,9 @@ svg {
     visibility: visible;
     text-align: center;
   }
+}
+
+
+body {
+  background: #84ade9;
 }
