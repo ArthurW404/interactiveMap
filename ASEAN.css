@@ -1,7 +1,7 @@
+
 .interactive_map {
   background-color: white;
   white-space: nowrap;
-  color: gray;
   width: 820px;
   height: 820px;
   margin-left: 10%;
@@ -11,16 +11,16 @@
 
 .country_details {
   /* position: relative; */ /* margin-right: 30%; padding-left: 0%; */
+  color: black;
   margin-left: 5%; /* margin-top: 5%; */ /* float: left; */
   display: grid;
-  font: 12px; /* display: inline-block; */
   width: 20%; /* margin-top: 20%; */
 }
 
 .details_container {
   /* width: auto; */
   display: inline-block;
-  vertical-align:top;
+  vertical-align: top;
   width: 45%;
   overflow: auto; /* border: 2px solid white; */
 }
@@ -29,7 +29,6 @@ svg {
   /* float: left; */
   margin-top: 5%;
   display: inline-block; /* width: auto; */ /* margin-left: 15%; */
-  border: 2px solid white; /* box-sizing: border-box; overflow: hidden; */ /* z-index: -1; */
 }
 
 .country {
@@ -60,9 +59,9 @@ svg {
 .width_warning {
   visibility: hidden;
 }
-
-
-
+#country_name {
+	color: black;
+}
 @media screen and (max-width: 1200px) {
   .interactive_map {
     visibility: hidden;
@@ -72,9 +71,4 @@ svg {
     visibility: visible;
     text-align: center;
   }
-}
-
-
-body {
-  background: #84ade9;
 }
