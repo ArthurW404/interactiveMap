@@ -81,23 +81,82 @@ const countries = [
   },
 ];
 
+var curr_country = 0;
+
 let country_info = document.querySelector("#info");
 let country_name = document.querySelector("#country_name");
+
+function add_description(country, country_element) {
+  country_name.innerText += country.name;
+  country_info.innerText += "\n" + country.description;
+  country_element.style.fill = "white";
+}
+
+function remove_description(country, country_element) {
+  country_name.innerText = "";
+  country_info.innerText = "";
+  country_element.style.fill = "#84ade9";
+
+  // country_info.style.background = "white";
+  // country_info.style.border = "";
+}
+
+
+var selected_country = null;
+
 // loop through every country id and add hover-like tag where information about the country is displayed
 countries.forEach((country) => {
   let lcCountry = country.name.toLowerCase();
   let country_id = "#" + lcCountry;
   console.log(country_id);
-  let country_selected = document.querySelector(country_id);
-  country_selected.addEventListener("mouseover", () => {
-    // may replace with innerHTML for styling or something
-    country_name.innerText += country.name;
-    country_info.innerText += "\n" + country.description;
-  });
-  country_selected.addEventListener("mouseout", () => {
-    country_name.innerText = "";
-    country_info.innerText = "";
-    // country_info.style.background = "";
-    // country_info.style.border = "";
-  });
+  let country_element = document.querySelector(country_id);
+  country.el = country_element;
+
+  country_element.onclick = () => {
+    // clearInterval(autoSlide);
+
+    if (selected_country != null) {
+      // Basically in click mode, we must remove the previously selected
+      // country before we can add a new country
+      remove_description(country, selected_country.el);
+    } 
+    else {
+      // This occurs when existing autoslide mode
+      // In order to avoid 
+      console.log("FK");
+      remove_description(country, countries[curr_country].el);
+    }
+
+    console.log(selected_country);
+
+    if (selected_country != country) {
+      // Set currently selected country as the newly clicked country
+      curr_country = -1;
+      selected_country = country;
+      add_description(country, country_element);
+    }
+    else {
+      // this section occurs when the same country is clicked twice
+      // essentially unselecting it
+      // resulting in the autoSlide to resume as usual
+      selected_country = null;
+      curr_country = 0;
+    } 
+
+  };
 });
+
+var autoSlide =  setInterval(
+  () => {
+    if ( (! selected_country) && (curr_country != -1) ) {
+      let curr_c = countries[curr_country];
+      remove_description(curr_c, curr_c.el);
+      curr_country = (curr_country + 1) % countries.length;
+      curr_c = countries[curr_country];
+      add_description(curr_c, curr_c.el);
+    }
+  },
+  5000
+);
+
+add_description(countries[0], countries[0].el)

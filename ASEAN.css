@@ -50,7 +50,6 @@ svg {
   stroke-width: 0.4;
   stroke-dasharray: none;
   stroke-linecap: round;
-  fill: white;
   fill-opacity: 1;
   fill-rule: nonzero;
   opacity: 1;
@@ -59,9 +58,11 @@ svg {
 .width_warning {
   visibility: hidden;
 }
+
 #country_name {
 	color: black;
 }
+
 @media screen and (max-width: 1200px) {
   .interactive_map {
     visibility: hidden;
