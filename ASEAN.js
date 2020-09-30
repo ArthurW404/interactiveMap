@@ -1,3 +1,98 @@
+class Queue {
+  constructor() {
+    this.arr = [];
+  }
+
+  get queue() {
+    return this.arr;
+  }
+
+  get size() {
+    return this.arr.length;
+  }
+
+  enqueue(item){
+    this.arr.push(item);
+  }
+
+  dequeue() {
+    return this.arr.shift();
+  }
+
+}
+
+class Country_Queue extends Queue {
+
+  enqueue(item) {
+    // if item already in queue, move item to top
+    this.arr = this.arr.filter( country => country != item);
+
+    super.enqueue(item);
+  }
+
+  display_country(details_container) {
+    // console.log(details_container.childNodes[1]);
+
+    details_container.innerHTML = "";
+    // console.log(this.arr.length);
+    const selected = this.arr.length - 1;
+    let i = 0;
+
+    this.arr.forEach((country) => {
+
+      // create new h1 object
+      let country_descript_block = document.createElement("div");
+
+      let h1 = document.createElement("h1");
+      h1.classList.add("country_details");
+
+      // highlight currently selected country
+      if (i == selected) {
+        // console.log("Selected is " + country.name);
+        country_descript_block.style.border = "1px solid grey";
+        country_descript_block.style.borderRadius = "15px";
+      }
+      h1.textContent = country.name;
+      
+      // create new div object
+      let div_descript = document.createElement("div");
+      div_descript.classList.add("country_details");
+      div_descript.innerText =  "\n" + country.description + "\n\n";
+
+      country_descript_block.insertBefore(h1, null);
+      country_descript_block.insertBefore(div_descript, null);
+
+      details_container.insertBefore(country_descript_block, details_container.childNodes[0]);
+
+      i++;
+    })
+  }
+
+}
+
+function add_description(country, country_element) {
+  // selects country on map
+  // adds country to queue
+  display_countries.enqueue(country);
+  // country_name.innerText += this.name;
+  // country_info.innerText += "\n" + this.description + "\n\n";
+  country_element.style.fill = "white";
+  display_countries.display_country(details_container);
+}
+
+function remove_description(country, country_element) {
+  // country_name.innerText = "";
+  // country_info.innerText = "";
+  if (display_countries.size == 3) {
+    display_countries.dequeue();
+    display_countries.display_country(details_container);
+  }
+  country_element.style.fill = "#84ade9";
+
+  // country_info.style.background = "white";
+  // country_info.style.border = "";
+}
+
 const countries = [
   {
     name: "Brunei",
@@ -81,28 +176,16 @@ const countries = [
   },
 ];
 
-var curr_country = 0;
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
 
+let display_countries = new Country_Queue();
+let curr_country = getRandomInt(countries.length);
 let country_info = document.querySelector("#info");
 let country_name = document.querySelector("#country_name");
-
-function add_description(country, country_element) {
-  country_name.innerText += country.name;
-  country_info.innerText += "\n" + country.description;
-  country_element.style.fill = "white";
-}
-
-function remove_description(country, country_element) {
-  country_name.innerText = "";
-  country_info.innerText = "";
-  country_element.style.fill = "#84ade9";
-
-  // country_info.style.background = "white";
-  // country_info.style.border = "";
-}
-
-
-var selected_country = null;
+let details_container = document.querySelector(".details_container");
+let selected_country = null;
 
 // loop through every country id and add hover-like tag where information about the country is displayed
 countries.forEach((country) => {
@@ -123,11 +206,10 @@ countries.forEach((country) => {
     else {
       // This occurs when existing autoslide mode
       // In order to avoid 
-      console.log("FK");
       remove_description(country, countries[curr_country].el);
     }
 
-    console.log(selected_country);
+    // console.log(selected_country);
 
     if (selected_country != country) {
       // Set currently selected country as the newly clicked country
@@ -140,13 +222,15 @@ countries.forEach((country) => {
       // essentially unselecting it
       // resulting in the autoSlide to resume as usual
       selected_country = null;
-      curr_country = 0;
+      curr_country = getRandomInt(countries.length);
+      
+      add_description(countries[curr_country], countries[curr_country].el)
     } 
-
   };
+  
 });
 
-var autoSlide =  setInterval(
+let autoSlide =  setInterval(
   () => {
     if ( (! selected_country) && (curr_country != -1) ) {
       let curr_c = countries[curr_country];
@@ -159,4 +243,4 @@ var autoSlide =  setInterval(
   5000
 );
 
-add_description(countries[0], countries[0].el)
+add_description(countries[curr_country], countries[curr_country].el)

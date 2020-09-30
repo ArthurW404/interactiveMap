@@ -21,6 +21,7 @@
   /* width: auto; */
   display: inline-block;
   vertical-align: top;
+  margin-top: 10%;
   width: 45%;
   overflow: auto; /* border: 2px solid white; */
 }
@@ -72,4 +73,8 @@ svg {
     visibility: visible;
     text-align: center;
   }
+}
+
+body {
+  background-color: #000000;
 }
